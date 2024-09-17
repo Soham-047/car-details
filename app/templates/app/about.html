@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        button {
+            background-color: #04AA6D;
+            border: 1px solid green;
+            color: white;
+            padding: 10px 24px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body>
+    <h2>About Cars(GET-Request)</h2>
+    <div class="form-container" style="padding: px;">
+        <div class="btn-group">
+            <a href="{% url 'home' %}"><button>Post Car Specs!!</button></a>
+          </div>
+          <br>
+          <form action="{% url 'about' %}" method="get" id="search-form">
+            <input type="text" placeholder="Search cars" id="search-input" value="{{ request.GET.search }}" name="search">
+            <button type="submit">Submit</button>
+          </form>
+    </div>
+    <br><br>
+    <div class="cont">
+        
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Username</th>
+                <th>Car Company</th>
+                <th>Car Name</th>
+                <th>Description</th>
+            </tr>
+            {% for car in cars %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ car.username }}</td>
+                <td>{{ car.car_company }}</td>
+                <td>{{ car.car_name }}</td>
+                <td>{{ car.car_desc }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No cars found</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+
+</html>

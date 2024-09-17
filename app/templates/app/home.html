@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body {
+            justify-content: space-between;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .whole {
+            display: flex;
+        }
+
+        .form-container {
+            width: 40%;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #04AA6D;
+            border: 1px solid green;
+            color: white;
+            padding: 10px 24px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #3e8e41;
+        }
+
+        .form-errors {
+            color: red;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1> The E-Garage (POST-Requests)</h1>
+    <br>
+    <div class="whole">
+        <div class="form-container">
+            <h2>Submit Car Information</h2>
+            <form method="post" action="">
+                {% csrf_token %}
+                {% if car_form.errors %}
+                    <div class="form-errors">
+                        <ul>
+                            {% for field in car_form %}
+                                {% for error in field.errors %}
+                                    <li>{{ field.label }}: {{ error }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in car_form.non_field_errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                <div class="form-group">
+                    <label for="username">Enter Your Name:</label>
+                    <input type="text" id="username" name="username" placeholder="Your Name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="car_company">Enter Car Company:</label>
+                    <input type="text" id="car_company" name="car_company" placeholder="Car Company" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="car_name">Enter Car Name:</label>
+                    <input type="text" id="car_name" name="car_name" placeholder="Car Name and Model" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="car_desc">Enter Car Description:</label>
+                    <input type="text" id="car_desc" name="car_desc" placeholder="Description" required>
+                </div>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <div class="form-container" style="border: none;">
+            <div class="btn-group">
+                <a href="{% url 'about' %}"><button>Check About Cars!!</button></a>
+              </div>
+        </div>
+
+    </div>
+</body>
+</html>
