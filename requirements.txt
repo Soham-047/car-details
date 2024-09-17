@@ -2,6 +2,7 @@ asgiref==3.8.1
 Django==5.1.1
 django-decouple==2.1
 django-gunicorn==0.1.1
+environ==1.0
 gunicorn==23.0.0
 packaging==24.1
 sqlparse==0.5.1

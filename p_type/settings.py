@@ -12,14 +12,21 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from decouple import config
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+from os import dotenv
+import environ
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECRET_KEY = 'django-insecure-$w)*g(i4f=#nslby$y+3r_)f=z@wlvf#hw616$p#8z%l5ey*%w'
 SECRET_KEY = config("SECRET_KEY")
 DEBUG = config("DEBUG", cast=bool)
 
-ALLOWED_HOSTS = config("ALLOWED_HOSTS").split(",")
+
+# Initialize environment variables
+env = environ.Env()
+environ.Env.read_env()  # This will read from your .env file
+
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 
 # Application definition
